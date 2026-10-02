@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+set +e
+
+mkdir -p /config/.config/sunshine
+
+if [ ! -f /config/.config/sunshine/sunshine.conf ]; then
+cat > /config/.config/sunshine/sunshine.conf <<'EOF'
+origin_web_ui_allowed = wan
+address_family = ipv4
+upnp = off
+EOF
+fi
+
+/usr/bin/wrapped-steam >>/config/steam-start.log 2>&1 &
+
+# Open Tabby automatically. If Electron/Tabby ever fails, fall back to xterm.
+sleep 3
+if command -v tabby >/dev/null 2>&1; then
+  tabby --no-sandbox >>/config/tabby.log 2>&1 &
+else
+  /usr/bin/xterm -title "Vast Terminal" -geometry 120x34+20+20 >>/config/xterm.log 2>&1 &
+fi
+
+sleep 3
+/usr/bin/sunshine /config/.config/sunshine/sunshine.conf >>/config/sunshine.log 2>&1 &
+
+wait

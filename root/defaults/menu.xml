@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/3.4/menu">
+  <menu id="root-menu" label="MENU">
+    <item label="Tabby Terminal">
+      <action name="Execute"><command>tabby --no-sandbox</command></action>
+    </item>
+    <item label="Fallback xterm">
+      <action name="Execute"><command>/usr/bin/xterm -title "Vast Terminal" -geometry 120x34+20+20</command></action>
+    </item>
+    <item label="Steam">
+      <action name="Execute"><command>/usr/bin/wrapped-steam</command></action>
+    </item>
+    <item label="ProtonUp-Qt">
+      <action name="Execute"><command>/opt/protonup-qt/AppRun</command></action>
+    </item>
+    <item label="Sunshine log">
+      <action name="Execute"><command>/usr/bin/xterm -title "Sunshine Log" -e tail -f /config/sunshine.log</command></action>
+    </item>
+  </menu>
+</openbox_menu>
