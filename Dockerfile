@@ -33,3 +33,4 @@ ENV TITLE="Vast Steam Gaming" \
 EXPOSE 3001/tcp
 EXPOSE 47984/tcp 47989/tcp 47990/tcp 48010/tcp
 EXPOSE 47998/udp 47999/udp 48000/udp
+EXPOSE 27031/udp 27036/udp 27036/tcp 27037/tcp
