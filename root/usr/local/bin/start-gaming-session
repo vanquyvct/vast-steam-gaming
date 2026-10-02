@@ -3,13 +3,22 @@ set +e
 
 mkdir -p /config/.config/sunshine
 
-if [ ! -f /config/.config/sunshine/sunshine.conf ]; then
-cat > /config/.config/sunshine/sunshine.conf <<'EOF'
-origin_web_ui_allowed = wan
-address_family = ipv4
-upnp = off
+sunshine_config=/config/.config/sunshine/sunshine.conf
+touch "$sunshine_config"
+
+while IFS='=' read -r key value; do
+  if grep -Eq "^[[:space:]]*${key}[[:space:]]*=" "$sunshine_config"; then
+    sed -i -E "s|^[[:space:]]*${key}[[:space:]]*=.*$|${key} = ${value}|" "$sunshine_config"
+  else
+    printf '%s = %s\n' "$key" "$value" >> "$sunshine_config"
+  fi
+done <<'EOF'
+origin_web_ui_allowed=wan
+origin_pin_allowed=wan
+address_family=ipv4
+upnp=off
+system_tray=disabled
 EOF
-fi
 
 /usr/bin/wrapped-steam >>/config/steam-start.log 2>&1 &
 

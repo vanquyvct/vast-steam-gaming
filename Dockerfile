@@ -20,7 +20,7 @@ COPY root/ /
 RUN chmod +x /usr/local/bin/start-gaming-session
 
 ENV TITLE="Vast Steam Gaming" \
-    PIXELFLUX_WAYLAND=true \
+    PIXELFLUX_WAYLAND=false \
     SELKIES_VIDEO_STREAMING_MODE=true \
     SELKIES_ENCODER="h264enc,h265enc" \
     SELKIES_FRAMERATE="60" \
